@@ -40,17 +40,17 @@
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}/files/data:/app/data"
     env:
-      PUID: 1000
-      PGID: 1000
-      TZ: Europe/Madrid
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Madrid"
 
       # Default Recipe Settings
-      RECIPE_PUBLIC: true
-      RECIPE_SHOW_NUTRITION: true
-      RECIPE_SHOW_ASSETS: true
-      RECIPE_LANDSCAPE_VIEW: true
-      RECIPE_DISABLE_COMMENTS: false
-      RECIPE_DISABLE_AMOUNT: false
+      RECIPE_PUBLIC: "true"
+      RECIPE_SHOW_NUTRITION: "true"
+      RECIPE_SHOW_ASSETS: "true"
+      RECIPE_LANDSCAPE_VIEW: "true"
+      RECIPE_DISABLE_COMMENTS: "false"
+      RECIPE_DISABLE_AMOUNT: "false"
 
       # Gunicorn
       # WEB_CONCURRENCY: 2
