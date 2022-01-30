@@ -27,7 +27,7 @@
 - name: Create app container
   docker_container:
     name: "{{ application_name }}-app"
-    image: "hkotel/mealie:latest"
+    image: "hkotel/mealie:v0.5.4"
     restart_policy: "always"
     cleanup: true
     pull: true
