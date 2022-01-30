@@ -30,6 +30,7 @@
     image: "hkotel/mealie:latest"
     restart_policy: "always"
     cleanup: true
+    pull: true
     log_driver: "awslogs"
     log_options:
       awslogs-region: "{{ cloudwatch_region }}"
