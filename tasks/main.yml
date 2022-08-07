@@ -43,6 +43,7 @@
     exposed_ports:
       - "3000"
     env:
+      API_URL: "http://mealie-backend:9000"
       VIRTUAL_HOST: "{{ domain_name }}"
       LETSENCRYPT_HOST: "{{ domain_name }}"
       VIRTUAL_PORT: "3000"
