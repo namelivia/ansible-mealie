@@ -67,7 +67,7 @@
       - "9000"
     env:
       ALLOW_SIGNUP: "false"
-      DB_ENGINE: sqlite
-      WORKERS_PER_CORE: 0.5
-      MAX_WORKERS: 1
-      WEB_CONCURRENCY: 1
+      DB_ENGINE: "sqlite"
+      WORKERS_PER_CORE: "0.5"
+      MAX_WORKERS: "1"
+      WEB_CONCURRENCY: "1"
