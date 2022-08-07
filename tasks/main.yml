@@ -46,3 +46,28 @@
       VIRTUAL_HOST: "{{ domain_name }}"
       LETSENCRYPT_HOST: "{{ domain_name }}"
       VIRTUAL_PORT: "3000"
+
+- name: Create backend container
+  docker_container:
+    name: "{{ application_name }}-backend"
+    image: "hkotel/mealie:api-v1.0.0beta-4"
+    restart_policy: "always"
+    cleanup: true
+    pull: true
+    log_driver: "awslogs"
+    log_options:
+      awslogs-region: "{{ cloudwatch_region }}"
+      awslogs-group: "{{ cloudwatch_log_group }}"
+      awslogs-stream: "{{ application_name }}-backend"
+    networks:
+      - name: "{{ docker_network_name }}"
+    volumes:
+      - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}/files/data:/app/data"
+    exposed_ports:
+      - "9000"
+    env:
+      ALLOW_SIGNUP: "false"
+      DB_ENGINE: sqlite
+      WORKERS_PER_CORE: 0.5
+      MAX_WORKERS: 1
+      WEB_CONCURRENCY: 1
