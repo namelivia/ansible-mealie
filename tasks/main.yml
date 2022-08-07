@@ -27,7 +27,7 @@
 - name: Create frontend container
   docker_container:
     name: "{{ application_name }}-frontend"
-    image: "docker pull hkotel/mealie:frontend-v1.0.0beta-4"
+    image: "hkotel/mealie:frontend-v1.0.0beta-4"
     restart_policy: "always"
     cleanup: true
     pull: true
