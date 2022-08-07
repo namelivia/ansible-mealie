@@ -24,10 +24,10 @@
     state: directory
     mode: 0755
 
-- name: Create app container
+- name: Create frontend container
   docker_container:
-    name: "{{ application_name }}-app"
-    image: "hkotel/mealie:v0.5.6"
+    name: "{{ application_name }}-frontend"
+    image: "docker pull hkotel/mealie:frontend-v1.0.0beta-4"
     restart_policy: "always"
     cleanup: true
     pull: true
@@ -35,29 +35,14 @@
     log_options:
       awslogs-region: "{{ cloudwatch_region }}"
       awslogs-group: "{{ cloudwatch_log_group }}"
-      awslogs-stream: "{{ application_name }}-app"
+      awslogs-stream: "{{ application_name }}-frontend"
     networks:
       - name: "{{ docker_network_name }}"
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}/files/data:/app/data"
+    exposed_ports:
+      - "3000"
     env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "Europe/Madrid"
-
-      # Default Recipe Settings
-      RECIPE_PUBLIC: "true"
-      RECIPE_SHOW_NUTRITION: "true"
-      RECIPE_SHOW_ASSETS: "true"
-      RECIPE_LANDSCAPE_VIEW: "true"
-      RECIPE_DISABLE_COMMENTS: "false"
-      RECIPE_DISABLE_AMOUNT: "false"
-
-      # Gunicorn
-      # WEB_CONCURRENCY: 2
-      # WORKERS_PER_CORE: 0.5
-      # MAX_WORKERS: 8
-
       VIRTUAL_HOST: "{{ domain_name }}"
       LETSENCRYPT_HOST: "{{ domain_name }}"
-      VIRTUAL_PORT: "80"
+      VIRTUAL_PORT: "3000"
