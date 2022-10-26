@@ -27,7 +27,7 @@
 - name: Create frontend container
   docker_container:
     name: "{{ application_name }}-frontend"
-    image: "hkotel/mealie:frontend-v1.0.0beta-4"
+    image: "hkotel/mealie:frontend-v1.0.0beta-5"
     restart_policy: "always"
     cleanup: true
     pull: true
@@ -51,7 +51,7 @@
 - name: Create backend container
   docker_container:
     name: "{{ application_name }}-backend"
-    image: "hkotel/mealie:api-v1.0.0beta-4"
+    image: "hkotel/mealie:api-v1.0.0beta-5"
     restart_policy: "always"
     cleanup: true
     pull: true
