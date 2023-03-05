@@ -7,6 +7,7 @@
       - domain_name is defined
       - cloudwatch_region is defined
       - cloudwatch_log_group is defined
+      - jwt_auth_jwk_set_url is defined
 
 - name: Create the dockernetwork
   docker_network:
@@ -27,7 +28,7 @@
 - name: Create frontend container
   docker_container:
     name: "{{ application_name }}-frontend"
-    image: "hkotel/mealie:frontend-v1.0.0beta-5"
+    image: "hkotel/mealie:frontend-jwt_authentication"
     restart_policy: "always"
     cleanup: true
     pull: true
@@ -51,7 +52,7 @@
 - name: Create backend container
   docker_container:
     name: "{{ application_name }}-backend"
-    image: "hkotel/mealie:api-v1.0.0beta-5"
+    image: "hkotel/mealie:api-jwt_authentication"
     restart_policy: "always"
     cleanup: true
     pull: true
@@ -68,6 +69,13 @@
       - "9000"
     env:
       ALLOW_SIGNUP: "false"
+      JWT_AUTH_ENABLED: "true"
+      JWT_AUTH_HEADER_NAME: "X-Pomerium-Jwt-Assertion"
+      JWT_AUTH_EMAIL_CLAIM: "email"
+      JWT_AUTH_NAME_CLAIM: "name"
+      JWT_AUTH_USERNAME_CLAIM: "user"
+      JWT_AUTH_AUTO_SIGN_UP: "true"
+      JWT_AUTH_JWK_SET_URL: "{{ jwt_auth_jwk_set_url }}"
       DB_ENGINE: "sqlite"
       WORKERS_PER_CORE: "1"
       MAX_WORKERS: "1"
