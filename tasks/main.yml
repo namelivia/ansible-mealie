@@ -8,6 +8,7 @@
       - cloudwatch_region is defined
       - cloudwatch_log_group is defined
       - jwt_auth_jwk_set_url is defined
+      - log_level is defined
 
 - name: Create the dockernetwork
   docker_network:
@@ -80,6 +81,7 @@
       WORKERS_PER_CORE: "1"
       MAX_WORKERS: "1"
       WEB_CONCURRENCY: "1"
+      LOG_LEVEL: "{{ log_level }}"
 
 - name: Setup file backups
   include_role:
