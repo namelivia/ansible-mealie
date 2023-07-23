@@ -4,7 +4,6 @@
     that:
       - application_name is defined
       - docker_network_name is defined
-      - domain_name is defined
       - loki_url is defined
       - jwt_auth_jwk_set_url is defined
       - log_level is defined
@@ -39,7 +38,6 @@
       loki-batch-size: "400"
     networks:
       - name: "{{ docker_network_name }}"
-      - name: "bridge"
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}/files/data:/app/data"
     exposed_ports:
@@ -62,7 +60,6 @@
       loki-batch-size: "400"
     networks:
       - name: "{{ docker_network_name }}"
-      - name: "bridge"
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}/files/data:/app/data"
     exposed_ports:
@@ -91,7 +88,3 @@
   include_role:
     name: ansible-backups
     tasks_from: setup-s3-backups
-
-- name: Restart proxy
-  shell: 
-    cmd: docker restart proxy
