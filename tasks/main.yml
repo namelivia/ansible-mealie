@@ -28,7 +28,7 @@
 - name: Create frontend container
   docker_container:
     name: "{{ application_name }}-frontend"
-    image: "namelivia/mealie:frontend-jwt_authentication"
+    image: "namelivia/mealie:frontend-nightly"
     restart_policy: "always"
     cleanup: true
     pull: true
@@ -50,7 +50,7 @@
 - name: Create backend container
   docker_container:
     name: "{{ application_name }}-backend"
-    image: "namelivia/mealie:api-jwt_authentication"
+    image: "namelivia/mealie:api-nightly"
     restart_policy: "always"
     cleanup: true
     pull: true
